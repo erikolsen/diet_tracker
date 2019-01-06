@@ -2,10 +2,12 @@ import React from "react"
 
 class Type extends React.Component {
   render () {
+    const withinRange = this.props.current <= this.props.high && this.props.current >= this.props.low
+    let visibility = withinRange ? 'block' : 'hidden'
     return (
       <div className='w-full border border-black mt-2'>
-        <div className={`w-full text-center border border-black p-1 ${this.props.color}`}>
-          { this.props.name }({this.props.estimate} grams)
+        <div className={`w-full text-center border p-1 border-black ${this.props.color}`}>
+          { this.props.name }({this.props.low}-{this.props.high}%)
         </div>
         <div className='m-2'>
           <label>
@@ -17,7 +19,13 @@ class Type extends React.Component {
           <span className='flex p-1'>
             Total grams X{this.props.multiplier}
           </span>
-          <input className='flex border border-black' type="text" name="name" />
+          <input onChange={(e) => this.props.update(this.props.name, e.target.value) } className={`flex border border-black`} type="text" name="name" />
+          <span className={`p-1`}>
+            { this.props.current }%
+          </span>
+          <span className={`p-1 ${visibility}`}>
+            😀
+          </span>
         </label>
       </div>
     )
