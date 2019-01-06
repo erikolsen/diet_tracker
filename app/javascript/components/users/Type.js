@@ -16,10 +16,10 @@ class Type extends React.Component {
           </label>
         </div>
         <label className='mt-2 flex justify-between p-1'>
-          <span className='flex p-1'>
+          <span className='flex p-1 text-sm'>
             Total grams X{this.props.multiplier}
           </span>
-          <input onChange={(e) => this.props.update(this.props.name, e.target.value) } className={`flex border border-black`} type="text" name="name" />
+          <input value={this.props.value / this.props.multiplier} onChange={(e) => this.props.update(this.props.name, e.target.value) } className={`flex border border-black`} type="text" name="name" />
           <span className={`p-1`}>
             { this.props.current }%
           </span>

@@ -3,31 +3,23 @@ import Meal from "./Meal"
 
 import PropTypes from "prop-types"
 
-class Type extends React.Component {
-  render () {
-    return (
-      <div className='w-full border border-black mt-2'>
-        <div className={`w-full text-center border border-black p-1 ${this.props.color}`}>
-          { this.props.name }({this.props.estimate} grams)
-        </div>
-        <div className='m-2'>
-          <label>
-            <textarea className='w-full border border-grey-light' placeholder='Food notes'>
-            </textarea>
-          </label>
-        </div>
-        <label className='mt-2 flex justify-between p-1'>
-          <span className='flex p-1'>
-            Total grams X{this.props.multiplier}
-          </span>
-          <input className='flex border border-black' type="text" name="name" />
-        </label>
-      </div>
-    )
-  }
-}
-
 class DailyView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      protein: 0,
+      carbs: 0,
+      fats: 0,
+      total: 0
+    }
+
+    this.updateTotal = this.updateTotal.bind(this)
+  }
+
+  updateTotal(value){
+    this.setState({total: value})
+  }
+
   render () {
     let protein = 160
     let carbs = 100
@@ -71,7 +63,7 @@ class DailyView extends React.Component {
               Fats:
             </div>
             <div className='border border-black w-1/3 p-2'>
-              Total:
+              Total: { this.state.total }
             </div>
           </div>
         </div>
@@ -89,7 +81,7 @@ class DailyView extends React.Component {
         </ul>
 
         <br />
-        <Meal name='Meal 1' />
+        <Meal name='Meal 1' updateTotal={this.updateTotal} />
         <br />
         <br />
         <Meal name='Meal 2' />
