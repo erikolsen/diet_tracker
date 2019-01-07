@@ -78,26 +78,24 @@ class DailyView extends React.Component {
   }
 
   percentOfTotal(value, total){
-    return Math.round(value / total * 100) + '%'
+    return Math.round((value / total) * 100)
   }
 
   render () {
-    let protein = 160
-    let carbs = 100
-    let fats = 100
-    let total =  protein * 4 + carbs * 4 + fats * 9 //1940
     let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein ))) || 1
     let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs ))) || 1
     let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats ))) || 1
     let newTotal = newProtein * 4 + newCarbs * 4  + newFats * 9
 
+    let proteinPercent = this.percentOfTotal(newProtein * 4, newTotal)
+    let carbPercent = this.percentOfTotal(newCarbs * 4, newTotal)
+    let fatPercent =this.percentOfTotal(newFats * 9, newTotal)
+
     let options = this.pieData([
-      [`Protein ${this.percentOfTotal(newProtein, newTotal)}`, newProtein ],
-      [`Fats ${this.percentOfTotal(newFats, newTotal)}`, newFats ],
-      [`Carbs ${this.percentOfTotal(newCarbs, newTotal)}`, newCarbs ],
+      [`Protein ${proteinPercent}%`, proteinPercent],
+      [`Fats ${fatPercent}%`, fatPercent],
+      [`Carbs ${carbPercent}%`, carbPercent],
     ])
-    //let pieChart = newTotal > 0 ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
-    let pieChart = true ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
 
     let meals = this.state.meals.map((meal, idx) => { return <Meal
         key={idx}
@@ -115,7 +113,7 @@ class DailyView extends React.Component {
       <div>
         <div className='flex'>
           <div className='w-2/3'>
-            { pieChart }
+            <HighchartsReact highcharts={Highcharts} options={options} />
           </div>
           <div className='w-1/3 mt-2 mr-2'>
             <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
@@ -132,7 +130,7 @@ class DailyView extends React.Component {
                 Fats Grams(x9): 100
               </div>
               <div className='border border-black p-2'>
-                Total Calories: { total }
+                Total Calories: 1940
               </div>
             </div>
 

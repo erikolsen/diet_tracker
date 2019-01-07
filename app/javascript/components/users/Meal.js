@@ -33,7 +33,7 @@ class Meal extends React.Component {
             { this.props.name }
           </div>
           <div className='p-2'>
-            { total || 0 }
+            { total || 0 } Calories
           </div>
         </div>
 
