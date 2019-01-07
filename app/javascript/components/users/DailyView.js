@@ -3,8 +3,32 @@ import Meal from "./Meal"
 import _ from 'lodash'
 
 import PropTypes from "prop-types"
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 const NEWMEAL = () => { return {protein: 0, carbs: 0, fats: 0, total: 0 } }
+const options = {
+  series: [{
+      type: 'pie',
+      name: 'Browser share',
+      data: [
+          ['Firefox', 45.0],
+          ['IE', 26.8],
+          {
+              name: 'Chrome',
+              y: 12.8,
+              sliced: true,
+              selected: true
+          },
+          ['Safari', 8.5],
+          ['Opera', 6.2],
+          ['Others', 0.7]
+      ]
+  }],
+  title: {
+    text: 'My stock chart'
+  }
+}
 
 class DailyView extends React.Component {
   constructor(props) {
@@ -39,19 +63,31 @@ class DailyView extends React.Component {
     }))
   }
 
+  pieData(data){
+    return {
+      series: [{
+          type: 'pie',
+          name: 'Browser share',
+          data: data
+      }],
+      title: {
+        text: 'Macronutrients Daily Percentage'
+      }
+    }
+  }
+
   render () {
     let protein = 160
     let carbs = 100
     let fats = 100
     let total =  protein * 4 + carbs * 4 + fats * 9 //1940
-    //let newProtein = parseInt(this.state.meals.map((el) => el.protein * 4)) || 0
-    //let newProtein = this.state.meals.map((meal) => meal.protein * 4).reduce((a,b) => { a + b }, 0) || 0
-    //let newCarbs = this.state.meals.map((el) => el.carbs * 4).reduce((a,b) => { a + b}, 0) || 0
-    //let newFats = this.state.meals.map((el) => el.fats * 9).reduce((a,b) => { a + b}, 0) || 0
     let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein * 4))) || 0
     let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs * 4))) || 0
     let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats * 9))) || 0
     let newTotal = newProtein + newCarbs + newFats
+
+    let options = this.pieData([['Protein', newProtein], ['Fats', newFats], ['Carbs', newCarbs]])
+    let pieChart = newTotal > 0 ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
 
     let meals = this.state.meals.map((meal, idx) => { return <Meal
         key={idx}
@@ -68,6 +104,7 @@ class DailyView extends React.Component {
     return (
       <div>
         <div>
+          { pieChart }
           <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-2xl'>
             Daily Targets
           </div>
