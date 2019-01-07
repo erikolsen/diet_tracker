@@ -54,7 +54,7 @@ class DailyView extends React.Component {
       credits: {
         enabled: false
       },
-      colors: ['red', 'gold', 'green'],
+      colors: ['#ef5753', '#ffed4a', '#38c172'],
       tooltip: {
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
