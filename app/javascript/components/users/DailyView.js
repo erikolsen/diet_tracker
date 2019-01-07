@@ -51,6 +51,9 @@ class DailyView extends React.Component {
             beta: 0
         }
       },
+      credits: {
+        enabled: false
+      },
       colors: ['red', 'gold', 'green'],
       tooltip: {
           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -172,7 +175,7 @@ class DailyView extends React.Component {
 
         { meals }
 
-        <div className='w-full h-8 flex justify-between text-center text-2xl bold'>
+        <div className='w-full h-8 flex justify-between text-center text-2xl bold mt-4'>
           <button onClick={this.removeMeal} className='bg-red w-1/2'>
             Remove
           </button>
