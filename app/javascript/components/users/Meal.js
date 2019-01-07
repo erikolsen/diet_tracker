@@ -33,7 +33,7 @@ class Meal extends React.Component {
             { this.props.name }
           </div>
           <div className='p-2'>
-            { total }
+            { total || 0 }
           </div>
         </div>
 
@@ -63,6 +63,7 @@ class Meal extends React.Component {
         <div className={expanded}>
           <div className=''>
             <Type
+              idx={this.props.idx}
               name='Protein'
               color='bg-red-light'
               multiplier='4'
@@ -73,6 +74,7 @@ class Meal extends React.Component {
               value={this.props.protein}
             />
             <Type
+              idx={this.props.idx}
               name='Carbohydrates'
               color='bg-green'
               multiplier='4'
@@ -83,6 +85,7 @@ class Meal extends React.Component {
               value={this.props.carbs}
             />
             <Type
+              idx={this.props.idx}
               name='Fats'
               color='bg-yellow'
               multiplier='9'

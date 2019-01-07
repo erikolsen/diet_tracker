@@ -4,37 +4,15 @@ import _ from 'lodash'
 
 import PropTypes from "prop-types"
 import Highcharts from 'highcharts'
+require('highcharts/highcharts-3d')(Highcharts);
 import HighchartsReact from 'highcharts-react-official'
 
 const NEWMEAL = () => { return {protein: 0, carbs: 0, fats: 0, total: 0 } }
-const options = {
-  series: [{
-      type: 'pie',
-      name: 'Browser share',
-      data: [
-          ['Firefox', 45.0],
-          ['IE', 26.8],
-          {
-              name: 'Chrome',
-              y: 12.8,
-              sliced: true,
-              selected: true
-          },
-          ['Safari', 8.5],
-          ['Opera', 6.2],
-          ['Others', 0.7]
-      ]
-  }],
-  title: {
-    text: 'My stock chart'
-  }
-}
-
 class DailyView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      meals: []
+      meals: [NEWMEAL()]
     }
 
     this.addMeal = this.addMeal.bind(this)
@@ -44,7 +22,7 @@ class DailyView extends React.Component {
 
   update(idx, type, value){
     let newMeals = this.state.meals
-    newMeals[idx][type] = parseInt(value) || 0
+    newMeals[idx][type.toLowerCase()] = parseInt(value) || 0
     this.setState({meals: newMeals})
   }
 
@@ -65,9 +43,32 @@ class DailyView extends React.Component {
 
   pieData(data){
     return {
+      chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
+      },
+      colors: ['red', 'gold', 'green'],
+      tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+          pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              depth: 35,
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.name}'
+              }
+          }
+      },
       series: [{
           type: 'pie',
-          name: 'Browser share',
+          name: 'Percent of Diet',
           data: data
       }],
       title: {
@@ -76,18 +77,27 @@ class DailyView extends React.Component {
     }
   }
 
+  percentOfTotal(value, total){
+    return Math.round(value / total * 100) + '%'
+  }
+
   render () {
     let protein = 160
     let carbs = 100
     let fats = 100
     let total =  protein * 4 + carbs * 4 + fats * 9 //1940
-    let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein * 4))) || 0
-    let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs * 4))) || 0
-    let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats * 9))) || 0
-    let newTotal = newProtein + newCarbs + newFats
+    let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein ))) || 1
+    let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs ))) || 1
+    let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats ))) || 1
+    let newTotal = newProtein * 4 + newCarbs * 4  + newFats * 9
 
-    let options = this.pieData([['Protein', newProtein], ['Fats', newFats], ['Carbs', newCarbs]])
-    let pieChart = newTotal > 0 ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
+    let options = this.pieData([
+      [`Protein ${this.percentOfTotal(newProtein, newTotal)}`, newProtein ],
+      [`Fats ${this.percentOfTotal(newFats, newTotal)}`, newFats ],
+      [`Carbs ${this.percentOfTotal(newCarbs, newTotal)}`, newCarbs ],
+    ])
+    //let pieChart = newTotal > 0 ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
+    let pieChart = true ?  <HighchartsReact highcharts={Highcharts} options={options} /> : ''
 
     let meals = this.state.meals.map((meal, idx) => { return <Meal
         key={idx}
@@ -103,43 +113,47 @@ class DailyView extends React.Component {
 
     return (
       <div>
-        <div>
-          { pieChart }
-          <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-2xl'>
-            Daily Targets
+        <div className='flex'>
+          <div className='w-2/3'>
+            { pieChart }
           </div>
-          <div className='flex justify-between text-lg'>
-            <div className='border border-black w-1/3 p-2'>
-              Protein: 160
+          <div className='w-1/3 mt-2 mr-2'>
+            <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
+              Daily Targets
             </div>
-            <div className='border border-black w-1/3 p-2'>
-              Carbs: 100
+            <div className='text-lg text-center'>
+              <div className='border border-black p-2'>
+                Protein Grams(x4): 160
+              </div>
+              <div className='border border-black p-2'>
+                Carbs Grams(x4): 100
+              </div>
+              <div className='border border-black p-2'>
+                Fats Grams(x9): 100
+              </div>
+              <div className='border border-black p-2'>
+                Total Calories: { total }
+              </div>
             </div>
-            <div className='border border-black w-1/3 p-2'>
-              Fats: 100
-            </div>
-            <div className='border border-black w-1/3 p-2'>
-              Total: { total }
-            </div>
-          </div>
-        </div>
 
-        <div>
-          <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-2xl'>
-            Daily Totals
-          </div>
-          <div className='flex justify-between text-lg'>
-            <div className='border border-black w-1/3 p-2'>
-              Protein: { newProtein }
+            <br />
+
+            <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
+              Daily Totals
             </div>
-            <div className='border border-black w-1/3 p-2'>
-              Carbs: { newCarbs }
-            </div>
-            <div className='border border-black w-1/3 p-2'>
-              Fats: { newFats }
-            </div>
-            <div className='border border-black w-1/3 p-2'>
-              Total: { newTotal }
+            <div className='text-lg text-center'>
+              <div className='border border-black p-2'>
+                Protein Grams: { newProtein }
+              </div>
+              <div className='border border-black p-2'>
+                Carbs Grams: { newCarbs }
+              </div>
+              <div className='border border-black p-2'>
+                Fats Grams: { newFats }
+              </div>
+              <div className='border border-black p-2'>
+                Total Calories: { newTotal }
+              </div>
             </div>
           </div>
         </div>
