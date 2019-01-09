@@ -90,9 +90,10 @@ class DailyView extends React.Component {
     let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats ))) || 1
     let newTotal = newProtein * 4 + newCarbs * 4  + newFats * 9
 
-    let proteinPercent = this.percentOfTotal(newProtein * 4, newTotal)
-    let carbPercent = this.percentOfTotal(newCarbs * 4, newTotal)
-    let fatPercent =this.percentOfTotal(newFats * 9, newTotal)
+    let totalPercent = newProtein + newCarbs + newFats
+    let proteinPercent = this.percentOfTotal(newProtein, totalPercent)
+    let carbPercent = this.percentOfTotal(newCarbs, totalPercent)
+    let fatPercent =this.percentOfTotal(newFats, totalPercent)
 
     let options = this.pieData([
       [`Protein ${proteinPercent}%`, proteinPercent],
@@ -120,7 +121,7 @@ class DailyView extends React.Component {
           </div>
           <div className='w-1/3 mt-2 mr-2'>
             <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
-              Daily Targets
+              Daily Targets { this.props.day }
             </div>
             <div className='text-lg text-center'>
               <div className='border border-black p-2'>
@@ -159,6 +160,19 @@ class DailyView extends React.Component {
           </div>
         </div>
 
+        <br />
+
+        { meals }
+
+        <div className='w-full h-8 flex justify-between text-center text-2xl bold mt-4 px-2'>
+          <button onClick={this.removeMeal} className='bg-red w-1/2'>
+            Remove Meal
+          </button>
+          <button onClick={this.addMeal} className='bg-green-light w-1/2'>
+            Add Meal
+          </button>
+        </div>
+
         <ul>
           <li className='m-2 text-lg'>
             Enter food with unit of measurement in big box.
@@ -171,18 +185,6 @@ class DailyView extends React.Component {
           </li>
         </ul>
 
-        <br />
-
-        { meals }
-
-        <div className='w-full h-8 flex justify-between text-center text-2xl bold mt-4'>
-          <button onClick={this.removeMeal} className='bg-red w-1/2'>
-            Remove
-          </button>
-          <button onClick={this.addMeal} className='bg-green-light w-1/2'>
-            Add
-          </button>
-        </div>
       </div>
     );
   }

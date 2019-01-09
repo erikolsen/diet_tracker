@@ -24,8 +24,8 @@ class Meal extends React.Component {
     let expandIcon = this.state.expanded ? '^' : 'v'
 
     return (
-      <div className='w-full text-2xl'>
-        <div className='w-full bg-grey-light p-2 flex justify-between'>
+      <div className='w-full text-2xl px-2'>
+        <div className='w-full bg-blue-lighter p-2 flex justify-between'>
           <button onClick={this.toggleExpand} className='border border-black rounded-full h-8 w-8'>
             { expandIcon }
           </button>
@@ -98,7 +98,7 @@ class Meal extends React.Component {
           </div>
 
           <div>
-            <div className='border border-black text-center bg-grey h-8 p-1'>
+            <div className='border border-black text-center bg-blue-lighter h-8 p-1'>
               { this.props.name } Total Calories
             </div>
             <div className='flex justify-between text-lg'>

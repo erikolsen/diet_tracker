@@ -17,6 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'react-rails'
 gem 'tailwindcss'
+gem "simple_calendar", "~> 2.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 

@@ -13,10 +13,14 @@
       <li class="mr-6">
         <%= link_to 'Back', users_path, class: 'text-white' %>
       </li>
+      <li class="mr-6">
+        <%= link_to 'Calendar', user_days_path, class: 'text-white' %>
+      </li>
     </ul>
   </div>
 </div>
-<%= react_component("users/DailyView", { firstName: "#{@user.first_name}" }) %>
+
+<%= react_component("users/DailyView", { firstName: "#{@user.first_name}", day: @day.to_s }) %>
 
 <p id="notice"><%= notice %></p>
 

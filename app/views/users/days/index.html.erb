@@ -1,0 +1,7 @@
+<%= month_calendar do |date| %>
+  <%= date %>
+
+  <div>
+    <%= link_to 'Add Meals', new_user_day_path(date: date) %>
+  </div>
+<% end %>
