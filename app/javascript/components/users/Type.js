@@ -11,7 +11,11 @@ class Type extends React.Component {
         </div>
         <div className='m-2'>
           <label>
-            <textarea className='w-full border border-grey-light' placeholder='Food notes'>
+            <textarea
+              onChange={(e) => this.props.update(this.props.idx, this.props.name, 'notes', e.target.value) }
+              className='w-full border border-grey-light'
+              placeholder='Food notes'
+              value={this.props.notes}>
             </textarea>
           </label>
         </div>
@@ -20,8 +24,8 @@ class Type extends React.Component {
             Total grams X{this.props.multiplier}
           </span>
           <input
-            value={this.props.value}
-            onChange={(e) => this.props.update(this.props.idx, this.props.name, e.target.value) }
+            value={this.props.grams}
+            onChange={(e) => this.props.update(this.props.idx, this.props.name, 'grams', e.target.value) }
             className={`w-1/3 flex border border-black`} type="text" name="name"
           />
           <span className={`p-1`}>

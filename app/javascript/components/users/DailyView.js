@@ -7,7 +7,12 @@ import Highcharts from 'highcharts'
 require('highcharts/highcharts-3d')(Highcharts);
 import HighchartsReact from 'highcharts-react-official'
 
-const NEWMEAL = () => { return {protein: 0, carbs: 0, fats: 0, total: 0 } }
+const NEWMEAL = () => { return {
+  protein: { grams: 0, notes: ''},
+  carbs: { grams: 0, notes: ''},
+  fats: { grams: 0, notes: ''},
+  total: 0 }
+}
 class DailyView extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +25,9 @@ class DailyView extends React.Component {
     this.update = this.update.bind(this)
   }
 
-  update(idx, type, value){
+  update(idx, type, attribute, value){
     let newMeals = this.state.meals
-    newMeals[idx][type.toLowerCase()] = parseInt(value) || 0
+    newMeals[idx][type.toLowerCase()][attribute] = value || ''
     this.setState({meals: newMeals})
   }
 
@@ -85,9 +90,10 @@ class DailyView extends React.Component {
   }
 
   render () {
-    let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein ))) || 1
-    let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs ))) || 1
-    let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats ))) || 1
+    console.log(this.state.meals)
+    let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein.grams ))) || 1
+    let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs.grams ))) || 1
+    let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats.grams ))) || 1
     let newTotal = newProtein * 4 + newCarbs * 4  + newFats * 9
 
     let totalPercent = newProtein + newCarbs + newFats
@@ -111,7 +117,6 @@ class DailyView extends React.Component {
         fats={meal.fats}
       />
     })
-    console.log("meals", this.state.meals)
 
     return (
       <div>

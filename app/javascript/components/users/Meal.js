@@ -17,7 +17,7 @@ class Meal extends React.Component {
   }
 
   render () {
-    let total =  this.props.protein * 4 + this.props.carbs * 4  + this.props.fats * 9  //1940
+    let total =  this.props.protein.grams * 4 + this.props.carbs.grams * 4  + this.props.fats.grams * 9  //1940
     let expanded = this.state.expanded ? 'block' : 'hidden'
     let deexpanded = this.state.expanded ? 'hidden' : 'block'
 
@@ -43,19 +43,19 @@ class Meal extends React.Component {
               <span className='p-1'>
                 Protein
               </span>
-              <input value={this.props.protein} onChange={(e) => this.props.update(this.props.idx, 'protein', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.protein.grams} onChange={(e) => this.props.update(this.props.idx, 'protein', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
             </label>
             <label className='p-1 bg-green flex justify-between'>
               <span className='p-1'>
                 Carbs
               </span>
-              <input value={this.props.carbs} onChange={(e) => this.props.update(this.props.idx, 'carbs', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.carbs.grams} onChange={(e) => this.props.update(this.props.idx, 'carbs', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
             </label>
             <label className='p-1 bg-yellow flex justify-between'>
               <span className='p-1'>
                 Fats
               </span>
-              <input value={this.props.fats} onChange={(e) => this.props.update(this.props.idx, 'fats', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.fats.grams} onChange={(e) => this.props.update(this.props.idx, 'fats', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
             </label>
           </div>
         </div>
@@ -70,19 +70,21 @@ class Meal extends React.Component {
               update={this.props.update}
               low={ 35 }
               high={ 40 }
-              current={Math.round(this.props.protein*4/total * 100) || 0}
-              value={this.props.protein}
+              current={Math.round(this.props.protein.grams*4/total * 100) || 0}
+              grams={this.props.protein.grams}
+              notes={this.props.protein.notes}
             />
             <Type
               idx={this.props.idx}
-              name='Carbohydrates'
+              name='Carbs'
               color='bg-green'
               multiplier='4'
               update={this.props.update}
               low={ 25 }
               high={ 40 }
               current={Math.round(this.props.carbs*4/total * 100) || 0}
-              value={this.props.carbs}
+              grams={this.props.carbs.grams}
+              notes={this.props.carbs.notes}
             />
             <Type
               idx={this.props.idx}
@@ -93,7 +95,8 @@ class Meal extends React.Component {
               low={ 25 }
               high={ 40 }
               current={Math.round(this.props.fats*9/total * 100) || 0}
-              value={this.props.fats}
+              grams={this.props.fats.grams}
+              notes={this.props.fats.notes}
             />
           </div>
 
