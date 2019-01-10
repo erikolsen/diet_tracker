@@ -1,6 +1,9 @@
 import React from "react"
 import Type from "./Type"
 
+const OPEN_ICON = '►'
+const CLOSED_ICON = '▼'
+
 class Meal extends React.Component {
   constructor(props) {
     super(props);
@@ -21,12 +24,12 @@ class Meal extends React.Component {
     let expanded = this.state.expanded ? 'block' : 'hidden'
     let deexpanded = this.state.expanded ? 'hidden' : 'block'
 
-    let expandIcon = this.state.expanded ? '^' : 'v'
+    let expandIcon = this.state.expanded ? OPEN_ICON : CLOSED_ICON
 
     return (
       <div className='w-full text-2xl px-2'>
         <div className='w-full bg-blue-lighter p-2 flex justify-between'>
-          <button onClick={this.toggleExpand} className='border border-black rounded-full h-8 w-8'>
+          <button onClick={this.toggleExpand} className='h-8 w-8'>
             { expandIcon }
           </button>
           <div className='p-2'>
@@ -106,13 +109,13 @@ class Meal extends React.Component {
             </div>
             <div className='flex justify-between text-lg'>
               <div className='border border-black w-1/3 p-2'>
-                Protein: { this.props.protein * 4}
+                Protein: { this.props.protein.grams * 4}
               </div>
               <div className='border border-black w-1/3 p-2'>
-                Carbs: { this.props.carbs * 4}
+                Carbs: { this.props.carbs.grams * 4}
               </div>
               <div className='border border-black w-1/3 p-2'>
-                Fats: { this.props.fats * 9}
+                Fats: { this.props.fats.grams * 9}
               </div>
               <div className='border border-black w-1/3 p-2'>
                 Total: { total }
