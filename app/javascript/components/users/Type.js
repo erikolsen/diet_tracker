@@ -10,14 +10,12 @@ class Type extends React.Component {
           { this.props.name }({this.props.low}-{this.props.high}%)
         </div>
         <div className='m-2'>
-          <label>
-            <textarea
-              onChange={(e) => this.props.update(this.props.idx, this.props.name, 'notes', e.target.value) }
-              className='w-full border border-grey-light'
-              placeholder='Food notes'
-              value={this.props.notes}>
-            </textarea>
-          </label>
+          <textarea
+            onChange={(e) => this.props.update(this.props.idx, this.props.name, 'notes', e.target.value) }
+            className='w-full border border-grey-light'
+            placeholder='Food notes'
+            value={this.props.notes}>
+          </textarea>
         </div>
         <label className='mt-2 flex justify-between p-1'>
           <span className='flex p-1 text-sm'>
@@ -31,7 +29,7 @@ class Type extends React.Component {
           <span className={`p-1`}>
             { this.props.current }%
           </span>
-          <span className={`p-1 ${visibility}`}>
+          <span className={`p-1 ${'hidden'}`}>
             😀
           </span>
         </label>

@@ -85,7 +85,7 @@ class Meal extends React.Component {
               update={this.props.update}
               low={ 25 }
               high={ 40 }
-              current={Math.round(this.props.carbs*4/total * 100) || 0}
+              current={Math.round(this.props.carbs.grams*4/total * 100) || 0}
               grams={this.props.carbs.grams}
               notes={this.props.carbs.notes}
             />
@@ -97,7 +97,7 @@ class Meal extends React.Component {
               update={this.props.update}
               low={ 25 }
               high={ 40 }
-              current={Math.round(this.props.fats*9/total * 100) || 0}
+              current={Math.round(this.props.fats.grams*9/total * 100) || 0}
               grams={this.props.fats.grams}
               notes={this.props.fats.notes}
             />

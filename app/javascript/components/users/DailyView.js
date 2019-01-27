@@ -17,13 +17,36 @@ class DailyView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      meals: [NEWMEAL()]
+      meals: [NEWMEAL(), NEWMEAL(), NEWMEAL(), NEWMEAL()],
+      workoutNotes: '',
+      cardio: false,
+      weights: false
     }
 
     this.addMeal = this.addMeal.bind(this)
     this.removeMeal = this.removeMeal.bind(this)
     this.update = this.update.bind(this)
+    this.addCardio = this.addCardio.bind(this)
+    this.addWeights = this.addWeights.bind(this)
+    this.addWorkoutNotes = this.addWorkoutNotes.bind(this)
   }
+
+  addWorkoutNotes(notes){
+    this.setState({workoutNotes: notes})
+  }
+
+  addCardio(){
+    this.setState(prevState => ({
+      cardio: !prevState.cardio
+    }))
+  }
+
+  addWeights(){
+    this.setState(prevState => ({
+      weights: !prevState.weights
+    }))
+  }
+
 
   update(idx, type, attribute, value){
     let newMeals = this.state.meals
@@ -90,7 +113,8 @@ class DailyView extends React.Component {
   }
 
   render () {
-    console.log(this.state.meals)
+    let hasCardio = this.state.cardio ? 'text-blue' : ''
+    let hasWeights = this.state.weights ? 'text-blue' : ''
     let newProtein = _.sum(this.state.meals.map((meal) => parseInt(meal.protein.grams ))) || 1
     let newCarbs = _.sum(this.state.meals.map((el) => parseInt(el.carbs.grams ))) || 1
     let newFats = _.sum(this.state.meals.map((el) => parseInt(el.fats.grams ))) || 1
@@ -126,7 +150,7 @@ class DailyView extends React.Component {
           </div>
           <div className='w-1/3 mt-2 mr-2'>
             <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
-              Daily Targets { this.props.day }
+              Daily Targets
             </div>
             <div className='text-lg text-center'>
               <div className='border border-black p-2'>
@@ -142,7 +166,6 @@ class DailyView extends React.Component {
                 Total Calories: 1940
               </div>
             </div>
-
             <br />
 
             <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
@@ -167,13 +190,48 @@ class DailyView extends React.Component {
 
         <br />
 
+        <div className='w-full text-2xl px-2 mb-4'>
+          <div className='w-full border border-black mt-2'>
+            <div className={`w-full text-center border-b bg-blue-light p-1 border-black h-8`}>
+              Exercise on { this.props.day }
+            </div>
+            <div className='m-2'>
+                <textarea
+                  onChange={(e) => this.addWorkoutNotes(e.target.value) }
+                  className='w-full border border-grey-light'
+                  placeholder='Exercise notes'
+                  value={this.props.notes}>
+                </textarea>
+            </div>
+            <div className='flex'>
+              <label
+                onClick={this.addCardio}
+                className='m-2 flex justify-between p-1'>
+                <span className='flex p-1 text-sm'>
+                  Cardio
+                </span>
+                <i className={`material-icons text-grey ${hasCardio}`}>favorite</i>
+              </label>
+              <label
+                onClick={this.addWeights}
+                className='m-2 flex justify-between p-1'>
+                <span className='flex p-1 text-sm'>
+                  Weights
+                </span>
+                <i className={`material-icons text-grey ${hasWeights}`}>fitness_center</i>
+              </label>
+            </div>
+          </div>
+        </div>
+
+
         { meals }
 
         <div className='w-full h-8 flex justify-between text-center text-2xl bold mt-4 px-2'>
-          <button onClick={this.removeMeal} className='bg-red w-1/2'>
+          <button onClick={this.removeMeal} className='bg-grey-light w-1/2'>
             Remove Meal
           </button>
-          <button onClick={this.addMeal} className='bg-green-light w-1/2'>
+          <button onClick={this.addMeal} className='bg-grey w-1/2'>
             Add Meal
           </button>
         </div>
