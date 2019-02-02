@@ -14,6 +14,38 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class='bg-black p-2 h-12 flex justify-between'>
+      <div class='flex'>
+        <%= link_to root_path, class: 'no-underline' do %>
+          <h1 class='text-white'>
+            Fryman Macronutrient Log
+          </h1>
+        <% end %>
+      </div>
+
+      <div class='flex'>
+        <ul class="list-reset flex">
+          <li class="mr-6">
+            <%= link_to 'Back', users_path, class: 'text-white' %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="mr-6">
+              <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+            </li>
+          <% else %>
+            <li class="mr-6">
+              <%= link_to('Login', new_user_session_path)  %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <div class='m-4'>
+      <%= yield %>
+    </div>
   </body>
 </html>

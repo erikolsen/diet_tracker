@@ -18,6 +18,8 @@ gem 'webpacker'
 gem 'react-rails'
 gem 'tailwindcss'
 gem "simple_calendar", "~> 2.0"
+gem 'devise'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
