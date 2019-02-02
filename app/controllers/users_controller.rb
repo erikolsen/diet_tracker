@@ -4,7 +4,45 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
+    user = User.new(
+     id: 1,
+     first_name: 'erik',
+     last_name: 'olsen',
+     email: 'me@email.com'
+    )
+    user2 = User.new(
+     id: 1,
+     first_name: 'Mandy',
+     last_name: 'olsen',
+     email: 'mandy@email.com'
+    )
+    user3 = User.new(
+     id: 1,
+     first_name: 'Mandy',
+     last_name: 'olsen',
+     email: 'mandy@email.com'
+    )
+    user4= User.new(
+     id: 1,
+     first_name: 'erik',
+     last_name: 'olsen',
+     email: 'me@email.com'
+    )
+    user5 = User.new(
+     id: 1,
+     first_name: 'Mandy',
+     last_name: 'olsen',
+     email: 'mandy@email.com'
+    )
+    user6 = User.new(
+     id: 1,
+     first_name: 'Mandy',
+     last_name: 'olsen',
+     email: 'mandy@email.com'
+    )
+    #@users = [user]
+    @users = [user, user2, user3, user4, user5, user6]
   end
 
   # GET /users/1

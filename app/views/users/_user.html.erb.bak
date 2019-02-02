@@ -1,0 +1,56 @@
+<div class="bg-white mx-auto shadow-lg rounded-lg overflow-hidden pt-4">
+  <div class="flex px-6 py-4">
+    <div class="mb-4 text-left w-1/4">
+      <p class="text-xl "><%= user.first_name.capitalize %> <%= user.last_name.capitalize%></p>
+      <p class="text-sm text-grey-dark"><%= user.email%></p>
+    </div>
+
+    <div class='text-lg w-1/4 mr-4'>
+      <p class='text-xl mb-2'>Todays totals</p>
+      <div class='flex mb-1'>
+        <span class='w-1/2'>Fats:</span>
+        <span class='w-1/2'><%= user.meal_plan.fats %>%</span>
+      </div>
+      <div class='flex mb-1'>
+        <span class='w-1/2'>Proteins:</span>
+        <span class='w-1/2'><%= user.meal_plan.protein %>%</span>
+      </div>
+      <div class='flex mb-1'>
+        <span class='w-1/2'>Carbs:</span>
+        <span class='w-1/2'><%= user.meal_plan.carbs %>%</span>
+      </div>
+      <div class='flex mb-1'>
+        <span class='w-1/2'>Calories:</span>
+        <span class='w-1/2'><%= user.meal_plan.calories %></span>
+      </div>
+      <div class='flex my-4'>
+        <span class='w-1/2'>On Track</span>
+        <span class='w-1/2 text-3xl'>👍</span>
+      </div>
+    </div>
+
+    <div class='text-lg w-2/4'>
+      <p class='text-xl mb-2'>Meal Plan</p>
+      <label class='flex'>
+        <span class='w-1/2'>Fats:</span>
+        <input class='border border-grey w-1/2' value="<%= user.meal_plan.fats %>" type='text' />
+      </label>
+
+      <label class='flex'>
+        <span class='w-1/2'>Proteins:</span>
+        <input class='border border-grey w-1/2' value="<%= user.meal_plan.protein %>" type='text' />
+      </label>
+
+      <label class='flex'>
+        <span class='w-1/2'>Carbs:</span>
+        <input class='border border-grey w-1/2' value="<%= user.meal_plan.carbs %>" type='text' />
+      </label>
+      <label class='flex'>
+        <span class='w-1/2'>Calories:</span>
+        <input class='border border-grey w-1/2' value="<%= user.meal_plan.calories %>" type='text' />
+      </label>
+      <input class='border border-black w-full my-2' type='submit' value='Update' />
+    </div>
+  </div>
+</div>
+
