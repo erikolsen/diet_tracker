@@ -1,4 +1,9 @@
-<%= react_component("users/DailyView", { firstName: "#{@user.first_name}" }) %>
+<%= react_component("users/DailyView", { firstName: "#{@user.first_name}",
+                                         targetFats: @user.current_daily_target.fats,
+                                         targetCarbs: @user.current_daily_target.carbs,
+                                         targetProteins: @user.current_daily_target.proteins,
+                                         targetCalories: @user.current_daily_target.calories
+}) %>
 
 <p id="notice"><%= notice %></p>
 

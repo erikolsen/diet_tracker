@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Daily Targets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fats</th>
+      <th>Carbs</th>
+      <th>Proteins</th>
+      <th>Calories</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @daily_targets.each do |daily_target| %>
+      <tr>
+        <td><%= daily_target.fats %></td>
+        <td><%= daily_target.carbs %></td>
+        <td><%= daily_target.proteins %></td>
+        <td><%= daily_target.calories %></td>
+        <td><%= daily_target.user.full_name %></td>
+        <td><%= link_to 'Show', user_daily_target_path(daily_target.user, daily_target) %></td>
+        <td><%= link_to 'Edit', edit_user_daily_target_path(daily_target.user, daily_target) %></td>
+        <td><%= link_to 'Destroy', user_daily_target_path(daily_target.user_id, daily_target), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Daily Target', new_user_daily_target_path %>

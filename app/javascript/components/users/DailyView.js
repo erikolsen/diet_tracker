@@ -17,7 +17,7 @@ class DailyView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      meals: [NEWMEAL(), NEWMEAL(), NEWMEAL(), NEWMEAL()],
+      meals: this.props.meals || [],
       workoutNotes: '',
       cardio: false,
       weights: false
@@ -49,8 +49,17 @@ class DailyView extends React.Component {
 
 
   update(idx, type, attribute, value){
+    const HEADERS = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    }
     let newMeals = this.state.meals
     newMeals[idx][type.toLowerCase()][attribute] = value || ''
+    fetch(this.props.updatePath,{
+      method: 'PUT',
+      headers: HEADERS,
+      body: JSON.stringify({meals: newMeals})
+    });
     this.setState({meals: newMeals})
   }
 
@@ -154,16 +163,16 @@ class DailyView extends React.Component {
             </div>
             <div className='text-lg text-center'>
               <div className='border border-black p-2'>
-                Protein Grams(x4): 160
+                Protein Grams(x4): { this.props.targetProteins }
               </div>
               <div className='border border-black p-2'>
-                Carbs Grams(x4): 100
+                Carbs Grams(x4): { this.props.targetCarbs }
               </div>
               <div className='border border-black p-2'>
-                Fats Grams(x9): 100
+                Fats Grams(x9): { this.props.targetFats }
               </div>
               <div className='border border-black p-2'>
-                Total Calories: 1940
+                Total Calories: { this.props.targetCalories }
               </div>
             </div>
             <br />

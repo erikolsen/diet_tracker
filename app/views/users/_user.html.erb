@@ -5,42 +5,46 @@
       <p class="text-sm text-grey-dark"><%= user.email%></p>
     </div>
 
-    <div>
-      <%= react_component("PieChart",{
-        calories: user.daily.calories,
-        protein: user.daily.protein,
-        carbs: user.daily.carbs,
-        fats: user.daily.fats
-      } ) %>
-    </div>
+    <%- if user.daily %>
+      <div>
+        <%= react_component("PieChart",{
+          calories: user.daily.total_calories,
+          protein: user.daily.total_proteins,
+          carbs: user.daily.total_carbs,
+          fats: user.daily.total_fats
+        } ) %>
+      </div>
+    <% end %>
 
-    <div class='text-lg'>
-      <p class='text-xl mb-2 text-center'>Daily Targets</p>
-      <div class='text-center flex justify-between m-4'>
-        <div class='w-1/4'>
-          <span class='text-xl'>🥑</span>
-          <span><%= user.daily_target.fats %>%</span>
-        </div>
+    <%- if user.current_daily_target %>
+      <div class='text-lg'>
+        <p class='text-xl mb-2 text-center'>Daily Targets</p>
+        <div class='text-center flex justify-between m-4'>
+          <div class='w-1/4'>
+            <span class='text-xl'>🥑</span>
+            <span><%= user.current_daily_target.fats %> grams</span>
+          </div>
 
-        <div class='w-1/4'>
-          <span class='text-xl'>🍗</span>
-          <span><%= user.daily_target.protein %>%</span>
-        </div>
+          <div class='w-1/4'>
+            <span class='text-xl'>🍗</span>
+            <span><%= user.current_daily_target.proteins %> grams</span>
+          </div>
 
-        <div class='w-1/4'>
-          <span class='text-xl'>🥖</span>
-          <span><%= user.daily_target.carbs %>%</span>
-        </div>
+          <div class='w-1/4'>
+            <span class='text-xl'>🥖</span>
+            <span><%= user.current_daily_target.carbs %> grams</span>
+          </div>
 
-        <div class='w-1/4'>
-          <span class='text-xl'>🔥</span>
-          <span><%= user.daily_target.calories %></span>
+          <div class='w-1/4'>
+            <span class='text-xl'>🔥</span>
+            <span><%= user.current_daily_target.calories %> Cals</span>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <div class='m-4'>
-      <%= link_to edit_user_path(user) do %>
+      <%= link_to new_user_daily_target_path(user) do %>
         <button class='hover:bg-blue-lightest w-full font-bold p-2 border-2 border-indigo text-indigo no-underline text-center'>
           Update
         </button>

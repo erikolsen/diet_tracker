@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Targets for:</strong>
+  <%= @daily_target.user.full_name %>
+</p>
+<p>
+  <strong>Fats:</strong>
+  <%= @daily_target.fats %>
+</p>
+
+<p>
+  <strong>Carbs:</strong>
+  <%= @daily_target.carbs %>
+</p>
+
+<p>
+  <strong>Proteins:</strong>
+  <%= @daily_target.proteins %>
+</p>
+
+<p>
+  <strong>Calories:</strong>
+  <%= @daily_target.calories %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_daily_target_path(@daily_target) %> |
+<%= link_to 'Back', user_daily_targets_path %>

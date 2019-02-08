@@ -1,5 +1,6 @@
 module Users
   class DaysController < ApplicationController
+    protect_from_forgery with: :null_session
     before_action :set_day, only: [:show, :edit, :update, :destroy]
     before_action :set_user, only: [:show, :edit, :update, :destroy, :new]
 
@@ -16,8 +17,9 @@ module Users
 
     # GET /days/new
     def new
-      #@day = Day.new(start_time: params[:date].to_date)
-      @day = params[:date]
+      @day = @user.days.find_or_create_by(start_time: params[:date].to_datetime) do |day|
+        day.meals = day.fresh_meals
+      end
     end
 
     # GET /days/1/edit
@@ -43,15 +45,16 @@ module Users
     # PATCH/PUT /days/1
     # PATCH/PUT /days/1.json
     def update
-      respond_to do |format|
-        if @day.update(day_params)
-          format.html { redirect_to @day, notice: 'Day was successfully updated.' }
-          format.json { render :show, status: :ok, location: @day }
-        else
-          format.html { render :edit }
-          format.json { render json: @day.errors, status: :unprocessable_entity }
-        end
-      end
+      @day.update(meals: params[:meals])
+      #respond_to do |format|
+        #if @day.update(day_params)
+          #format.html { redirect_to @day, notice: 'Day was successfully updated.' }
+          #format.json { render :show, status: :ok, location: @day }
+        #else
+          #format.html { render :edit }
+          #format.json { render json: @day.errors, status: :unprocessable_entity }
+        #end
+      #end
     end
 
     # DELETE /days/1
@@ -74,9 +77,13 @@ module Users
         @user = User.find(params[:user_id])
       end
 
+      def params
+        request.parameters
+      end
+
       # Never trust parameters from the scary internet, only allow the white list through.
       def day_params
-        params.require(:day).permit(:start_time, :user_id)
+        params.require(:day).permit(:start_time, :user_id, :meals)
       end
   end
 end

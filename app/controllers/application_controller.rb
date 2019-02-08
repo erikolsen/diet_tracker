@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    user_path(resource)
+    new_user_day_path(resource, date: Date.today)
   end
 end
