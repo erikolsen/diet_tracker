@@ -4,6 +4,10 @@ module Users
     before_action :set_day, only: [:show, :edit, :update, :destroy]
     before_action :set_user, only: [:show, :edit, :update, :destroy, :new]
 
+    def params
+      request.parameters
+    end
+
     # GET /days
     # GET /days.json
     def index
@@ -75,10 +79,6 @@ module Users
 
       def set_user
         @user = User.find(params[:user_id])
-      end
-
-      def params
-        request.parameters
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.

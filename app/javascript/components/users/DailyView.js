@@ -245,18 +245,6 @@ class DailyView extends React.Component {
           </button>
         </div>
 
-        <ul>
-          <li className='m-2 text-lg'>
-            Enter food with unit of measurement in big box.
-          </li>
-          <li className='m-2 text-lg'>
-            Add grams below then times by number and that equals calories for that food.
-          </li>
-          <li className='m-2 text-lg'>
-            Take the grams of each box and add all protein, carb, and fat boxes up at bottom and same with calories.
-          </li>
-        </ul>
-
       </div>
     );
   }
