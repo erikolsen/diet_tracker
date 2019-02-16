@@ -1,7 +1,7 @@
 <%= month_calendar do |date| %>
-  <%= date %>
-
-  <div>
-    <%= link_to 'Add Meals', new_user_day_path(date: date) %>
-  </div>
+  <%= link_to new_user_day_path(date: date), class: 'no-underline' do %>
+    <div class='circle text-center text-xl p-8 rounded-full'>
+      <%= date.day %>
+    </div>
+  <% end %>
 <% end %>

@@ -1,8 +1,6 @@
 import React from "react"
 import Type from "./Type"
 
-//const CLOSED_ICON = '►'
-//const OPEN_ICON = '▼'
 const CLOSED_ICON = 'chevron_right'
 const OPEN_ICON = 'expand_more'
 

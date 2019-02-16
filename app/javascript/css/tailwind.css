@@ -61,3 +61,7 @@
  * @import "utilities/skew-transforms";
  */
 
+.simple-calendar .today .circle {
+  @apply bg-blue-lighter;
+}
+
