@@ -81,6 +81,7 @@ class DailyView extends React.Component {
   pieData(data){
     return {
       chart: {
+        height: '70%',
         type: 'pie',
         options3d: {
             enabled: true,
@@ -112,7 +113,9 @@ class DailyView extends React.Component {
           data: data
       }],
       title: {
-        text: 'Macronutrients Daily Percentage'
+        text: `<b class='text-5xl'>Macro Breakdowns</b>`,
+        x: -30,
+        y: 30
       }
     }
   }
@@ -135,9 +138,9 @@ class DailyView extends React.Component {
     let fatPercent =this.percentOfTotal(newFats, totalPercent)
 
     let options = this.pieData([
-      [`Protein ${proteinPercent}%`, proteinPercent],
-      [`Fats ${fatPercent}%`, fatPercent],
-      [`Carbs ${carbPercent}%`, carbPercent],
+      [`<span class='text-4xl'>Protein ${proteinPercent}%</span>`, proteinPercent],
+      [`</span class='text-4xl'>Fats ${fatPercent}%</span>`, fatPercent],
+      [`</span class='text-4xl'>Carbs ${carbPercent}%</span>`, carbPercent],
     ])
 
     let meals = this.state.meals.map((meal, idx) => { return <Meal
@@ -153,45 +156,49 @@ class DailyView extends React.Component {
 
     return (
       <div>
-        <div className='flex'>
-          <div className='w-2/3'>
+        <div className=''>
+          <div className='pt-8'>
             <HighchartsReact highcharts={Highcharts} options={options} />
           </div>
-          <div className='w-1/3 mt-2 mr-2'>
-            <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
-              Daily Targets
-            </div>
-            <div className='text-lg text-center'>
-              <div className='border border-black p-2'>
-                Protein Grams(x4): { this.props.targetProteins }
-              </div>
-              <div className='border border-black p-2'>
-                Carbs Grams(x4): { this.props.targetCarbs }
-              </div>
-              <div className='border border-black p-2'>
-                Fats Grams(x9): { this.props.targetFats }
-              </div>
-              <div className='border border-black p-2'>
-                Total Calories: { this.props.targetCalories }
-              </div>
-            </div>
-            <br />
 
-            <div className='border border-black text-center bg-blue-lighter h-8 p-1 text-xl'>
-              Daily Totals
+          <div className='flex'>
+            <div className='mx-2 w-1/2'>
+              <div className='border border-black text-center bg-blue-lighter p-4 text-4xl'>
+                Daily Targets
+              </div>
+              <div className='text-3xl text-center'>
+                <div className='border border-black p-4'>
+                  Protein Grams(x4): { this.props.targetProteins }
+                </div>
+                <div className='border border-black p-4'>
+                  Carbs Grams(x4): { this.props.targetCarbs }
+                </div>
+                <div className='border border-black p-4'>
+                  Fats Grams(x9): { this.props.targetFats }
+                </div>
+                <div className='border border-black p-4'>
+                  Total Calories: { this.props.targetCalories }
+                </div>
+              </div>
             </div>
-            <div className='text-lg text-center'>
-              <div className='border border-black p-2'>
-                Protein Grams: { newProtein }
+
+            <div className='mx-2 w-1/2'>
+              <div className='border border-black text-center bg-blue-lighter p-4 text-4xl'>
+                Daily Totals
               </div>
-              <div className='border border-black p-2'>
-                Carbs Grams: { newCarbs }
-              </div>
-              <div className='border border-black p-2'>
-                Fats Grams: { newFats }
-              </div>
-              <div className='border border-black p-2'>
-                Total Calories: { newTotal }
+              <div className='text-3xl text-center'>
+                <div className='border border-black p-4'>
+                  Protein Grams: { newProtein }
+                </div>
+                <div className='border border-black p-4'>
+                  Carbs Grams: { newCarbs }
+                </div>
+                <div className='border border-black p-4'>
+                  Fats Grams: { newFats }
+                </div>
+                <div className='border border-black p-4'>
+                  Total Calories: { newTotal }
+                </div>
               </div>
             </div>
           </div>
@@ -199,10 +206,10 @@ class DailyView extends React.Component {
 
         <br />
 
-        <div className='w-full text-2xl px-2 mb-4'>
+        <div className='w-full text-5xl px-2 mb-4'>
           <div className='w-full border border-black mt-2'>
-            <div className={`w-full text-center border-b bg-blue-light p-1 border-black h-8`}>
-              Exercise on { this.props.day }
+            <div className={`w-full text-center border-b bg-blue-light p-8 border-black`}>
+              Exercise Today
             </div>
             <div className='m-2'>
                 <textarea
@@ -212,22 +219,22 @@ class DailyView extends React.Component {
                   value={this.props.notes}>
                 </textarea>
             </div>
-            <div className='flex'>
+            <div className='flex justify-between'>
               <label
                 onClick={this.addCardio}
-                className='m-2 flex justify-between p-1'>
-                <span className='flex p-1 text-sm'>
+                className='m-2 flex justify-between'>
+                <span className='flex p-4 text-6xl'>
                   Cardio
                 </span>
-                <i className={`material-icons text-grey ${hasCardio}`}>favorite</i>
+                <i className={`material-icons text-grey text-6xl ${hasCardio}`}>favorite</i>
               </label>
               <label
                 onClick={this.addWeights}
-                className='m-2 flex justify-between p-1'>
-                <span className='flex p-1 text-sm'>
+                className='m-2 flex justify-between'>
+                <span className='flex p-4 text-6xl'>
                   Weights
                 </span>
-                <i className={`material-icons text-grey ${hasWeights}`}>fitness_center</i>
+                <i className={`material-icons text-grey text-6xl ${hasWeights}`}>fitness_center</i>
               </label>
             </div>
           </div>
@@ -236,8 +243,8 @@ class DailyView extends React.Component {
 
         { meals }
 
-        <div className='w-full h-8 flex justify-between text-center text-2xl bold mt-4 px-2'>
-          <button onClick={this.removeMeal} className='bg-grey-light w-1/2'>
+        <div className='w-full flex justify-between text-center text-5xl bold mt-4 px-2'>
+          <button onClick={this.removeMeal} className='bg-grey-light w-1/2 py-4'>
             Remove Meal
           </button>
           <button onClick={this.addMeal} className='bg-grey w-1/2'>

@@ -6,7 +6,7 @@ class Type extends React.Component {
     let visibility = withinRange ? 'block' : 'hidden'
     return (
       <div className='w-full border border-black mt-2'>
-        <div className={`w-full text-center border p-1 border-black ${this.props.color}`}>
+        <div className={`w-full text-center border p-8 border-black ${this.props.color} text-5xl`}>
           { this.props.name }({this.props.low}-{this.props.high}%)
         </div>
         <div className='m-2'>
@@ -17,8 +17,8 @@ class Type extends React.Component {
             value={this.props.notes}>
           </textarea>
         </div>
-        <label className='mt-2 flex justify-between p-1'>
-          <span className='flex p-1 text-sm'>
+        <label className='mt-2 flex justify-between p-4 text-4xl'>
+          <span className='flex p-4'>
             Total grams X{this.props.multiplier}
           </span>
           <input

@@ -22,17 +22,30 @@ class PieChart extends React.Component {
           data: data
       }],
       title: {
-        text: 'Macronutrients Daily Percentage<br/>Total Calories Today: ' + this.props.calories
+        text: `<b class='text-4xl'>Total Calories Today: ${this.props.calories}</b>`,
+        x: -30,
+        y: 30
       }
     }
   }
 
+  percentOfTotal(value, total){
+    console.log(value)
+    return Math.round((value / total) * 100)
+  }
 
   render () {
+    let newTotal = this.props.protein  + this.props.carbs  + this.props.fats
+    console.log(newTotal)
+
+    let proteinPercent = this.percentOfTotal(this.props.protein, newTotal)
+    let carbPercent = this.percentOfTotal(this.props.carbs, newTotal)
+    let fatPercent =this.percentOfTotal(this.props.fats, newTotal)
+
     let options = this.pieData([
-      [`Protein ${this.props.protein}%`, this.props.protein],
-      [`Fats ${this.props.fats}%`, this.props.fats],
-      [`Carbs ${this.props.carbs}%`, this.props.carbs],
+      [`<span class='text-3xl'>Protein ${proteinPercent}%</span>`, proteinPercent],
+      [`</span class='text-3xl'>Fats ${fatPercent}%</span>`, fatPercent],
+      [`</span class='text-3xl'>Carbs ${carbPercent}%</span>`, carbPercent],
     ])
     return (
       <HighchartsReact highcharts={Highcharts} options={options} />

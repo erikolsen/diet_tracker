@@ -1,41 +1,49 @@
-<h1>New Daily Target</h1>
+<div class='h-screen bg-blue-lightest py-32'>
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden pt-8 mb-4 mx-8 py-8">
+    <p class='text-5xl text-center'>New Daily Target</p>
 
-<%= form_with(model: [@user, @daily_target], local: true) do |form| %>
-  <% if @daily_target.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@daily_target.errors.count, "error") %> prohibited this daily_target from being saved:</h2>
+    <div class='text-5xl p-8'>
+      <%= form_with(model: [@user, @daily_target], local: true) do |form| %>
+        <% if @daily_target.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@daily_target.errors.count, "error") %> prohibited this daily_target from being saved:</h2>
 
-      <ul>
-      <% @daily_target.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% @daily_target.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+          <%= form.label :fat_grams %>
+        <div class="my-8">
+          <%= form.number_field :fats, class: 'border border-grey w-full p-4 my-8' %>
+        </div>
+
+        <div class="my-8">
+          <%= form.label :carb_grams %>
+          <%= form.number_field :carbs, class: 'border border-grey w-full p-4 my-8' %>
+        </div>
+
+        <div class="my-8">
+          <%= form.label :protein_grams %>
+          <%= form.number_field :proteins, class: 'border border-grey w-full p-4 my-8' %>
+        </div>
+
+        <div class="my-8">
+          <%= form.label :calories %>
+          <%= form.number_field :calories, class: 'border border-grey w-full p-4 my-8' %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Update", class: 'border-2 border-indigo py-2 px-4 rounded-lg w-full' %>
+        </div>
       <% end %>
-      </ul>
+
+      <div class='mt-8'>
+        <%= link_to 'Back', users_path %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :fats %>
-    <%= form.number_field :fats %>
   </div>
-
-  <div class="field">
-    <%= form.label :carbs %>
-    <%= form.number_field :carbs %>
-  </div>
-
-  <div class="field">
-    <%= form.label :proteins %>
-    <%= form.number_field :proteins %>
-  </div>
-
-  <div class="field">
-    <%= form.label :calories %>
-    <%= form.number_field :calories %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', user_daily_targets_path %>
+</div>

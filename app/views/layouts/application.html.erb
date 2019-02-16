@@ -15,7 +15,7 @@
 
   <body>
     <div class='bg-black p-4 h-24 flex justify-between'>
-      <div class='flex'>
+      <div class='flex items-center'>
         <%= link_to root_path, class: 'no-underline' do %>
           <h1 class='text-white text-5xl p-4'>
             Fryman Macro Log
@@ -24,16 +24,16 @@
       </div>
 
       <div class='flex'>
-        <ul class="list-reset flex">
-          <li class="mr-6">
-            <%= link_to 'Back', users_path, class: 'text-white' %>
-          </li>
+        <ul class="list-reset flex text-3xl items-center">
           <% if user_signed_in? %>
             <li class="mr-6">
-              <%= link_to 'Calendar', user_days_path(current_user), class: 'text-white' %>
+              <%= link_to user_days_path(current_user), class: 'text-white no-underline'  do %>
+                <i class='material-icons'>event</i>
+                <span class=''>Calendar</span>
+              <% end %>
             </li>
             <li class="mr-6">
-              <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+              <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'text-white no-underline') %>
             </li>
           <% else %>
             <li class="mr-6">
@@ -44,8 +44,10 @@
       </div>
     </div>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class='text-5xl'>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
 
     <%= yield %>
   </body>

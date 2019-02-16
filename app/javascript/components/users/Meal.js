@@ -1,8 +1,10 @@
 import React from "react"
 import Type from "./Type"
 
-const OPEN_ICON = '►'
-const CLOSED_ICON = '▼'
+//const CLOSED_ICON = '►'
+//const OPEN_ICON = '▼'
+const CLOSED_ICON = 'chevron_right'
+const OPEN_ICON = 'expand_more'
 
 class Meal extends React.Component {
   constructor(props) {
@@ -27,11 +29,9 @@ class Meal extends React.Component {
     let expandIcon = this.state.expanded ? OPEN_ICON : CLOSED_ICON
 
     return (
-      <div className='w-full text-2xl px-2'>
-        <div className='w-full bg-blue-lighter p-2 flex justify-between'>
-          <button onClick={this.toggleExpand} className='h-8 w-8'>
-            { expandIcon }
-          </button>
+      <div className='w-full text-5xl px-2'>
+        <div className='w-full bg-blue-lighter p-8 flex justify-between items-center'>
+          <i onClick={this.toggleExpand} className='material-icons text-black text-6xl font-black'>{expandIcon}</i>
           <div className='p-2'>
             { this.props.name }
           </div>
@@ -43,22 +43,22 @@ class Meal extends React.Component {
         <div className={deexpanded}>
           <div className={`flex justify-between pb-2`}>
             <label className='p-1 bg-red-light flex justify-between'>
-              <span className='p-1'>
+              <span className='p-8'>
                 Protein
               </span>
-              <input value={this.props.protein.grams} onChange={(e) => this.props.update(this.props.idx, 'protein', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.protein.grams} onChange={(e) => this.props.update(this.props.idx, 'protein', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
             </label>
             <label className='p-1 bg-green flex justify-between'>
-              <span className='p-1'>
+              <span className='p-8'>
                 Carbs
               </span>
-              <input value={this.props.carbs.grams} onChange={(e) => this.props.update(this.props.idx, 'carbs', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.carbs.grams} onChange={(e) => this.props.update(this.props.idx, 'carbs', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
             </label>
             <label className='p-1 bg-yellow flex justify-between'>
-              <span className='p-1'>
+              <span className='p-8'>
                 Fats
               </span>
-              <input value={this.props.fats.grams} onChange={(e) => this.props.update(this.props.idx, 'fats', 'grams', e.target.value) } className={`w-1/3 border border-black`} type="text" name="name" />
+              <input value={this.props.fats.grams} onChange={(e) => this.props.update(this.props.idx, 'fats', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
             </label>
           </div>
         </div>
@@ -104,22 +104,22 @@ class Meal extends React.Component {
           </div>
 
           <div>
-            <div className='border border-black text-center bg-blue-lighter h-8 p-1'>
+            <div className='border border-black text-center bg-blue-lighter p-8 text-5xl'>
               { this.props.name } Total Calories
             </div>
-            <div className='flex justify-between text-lg'>
-              <div className='border border-black w-1/3 p-2'>
+            <div className='flex justify-between text-4xl'>
+              <div className='w-1/3 p-8'>
                 Protein: { this.props.protein.grams * 4}
               </div>
-              <div className='border border-black w-1/3 p-2'>
+              <div className='border border-black w-1/3 p-8'>
                 Carbs: { this.props.carbs.grams * 4}
               </div>
-              <div className='border border-black w-1/3 p-2'>
+              <div className='w-1/3 p-8'>
                 Fats: { this.props.fats.grams * 9}
               </div>
-              <div className='border border-black w-1/3 p-2'>
-                Total: { total }
-              </div>
+            </div>
+            <div className='w-full border border-black p-8 text-5xl'>
+              Total: { total }
             </div>
           </div>
         </div>

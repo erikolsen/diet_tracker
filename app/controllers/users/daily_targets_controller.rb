@@ -30,7 +30,7 @@ module Users
 
       respond_to do |format|
         if @daily_target.save
-          format.html { redirect_to [@user, @daily_target], notice: 'Daily target was successfully created.' }
+          format.html { redirect_to @user, notice: 'Daily target was successfully created.' }
           format.json { render :show, status: :created, location: @daily_target }
         else
           format.html { render :new }

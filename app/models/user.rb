@@ -7,7 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :validatable, :trackable
 
   def daily
-    @daily ||= days.find_by(start_time: Date.today.beginning_of_day)
+    #@daily ||= days.find_by(start_time: Date.today.beginning_of_day)
+    @daily ||= days.last
   end
 
   def todays_meals

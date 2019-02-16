@@ -1,12 +1,12 @@
-<div class='px-4 w-full lg:w-1/3'>
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden pt-4 mb-4">
-    <div class="mb-2 text-center text-2xl">
+<div class='px-8 w-full lg:w-1/3'>
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden pt-4 my-8">
+    <div class="mb-8 text-center text-5xl">
       <%= link_to "#{user.first_name.capitalize} #{user.last_name.capitalize}", user_path(user), class: 'no-underline hover:text-blue hover:bg-white' %>
-      <p class="text-sm text-grey-dark"><%= user.email%></p>
+      <p class="text-3xl text-grey-dark m-6"><%= user.email%></p>
     </div>
 
     <%- if user.daily %>
-      <div>
+      <div class='text-5xl'>
         <%= react_component("PieChart",{
           calories: user.daily.total_calories,
           protein: user.daily.total_proteins,
@@ -17,35 +17,35 @@
     <% end %>
 
     <%- if user.current_daily_target %>
-      <div class='text-lg'>
-        <p class='text-xl mb-2 text-center'>Daily Targets</p>
+      <div class='text-4xl m-8'>
+        <p class='text-5xl mb-8 text-center'>Daily Targets</p>
         <div class='text-center flex justify-between m-4'>
           <div class='w-1/4'>
-            <span class='text-xl'>🥑</span>
-            <span><%= user.current_daily_target.fats %> grams</span>
+            <span class=''>🥑</span>
+            <span><%= user.current_daily_target.fats %>g</span>
           </div>
 
           <div class='w-1/4'>
-            <span class='text-xl'>🍗</span>
-            <span><%= user.current_daily_target.proteins %> grams</span>
+            <span class=''>🍗</span>
+            <span><%= user.current_daily_target.proteins %>g</span>
           </div>
 
           <div class='w-1/4'>
-            <span class='text-xl'>🥖</span>
-            <span><%= user.current_daily_target.carbs %> grams</span>
+            <span class=''>🥖</span>
+            <span><%= user.current_daily_target.carbs %>g</span>
           </div>
 
           <div class='w-1/4'>
-            <span class='text-xl'>🔥</span>
-            <span><%= user.current_daily_target.calories %> Cals</span>
+            <span class=''>🔥</span>
+            <span><%= user.current_daily_target.calories %>cal</span>
           </div>
         </div>
       </div>
     <% end %>
 
-    <div class='m-4'>
+    <div class='flex justify-center'>
       <%= link_to new_user_daily_target_path(user) do %>
-        <button class='hover:bg-blue-lightest w-full font-bold p-2 border-2 border-indigo text-indigo no-underline text-center'>
+        <button class='m-4 hover:bg-blue-lightest font-bold text-3xl py-2 px-32 border-2 border-indigo text-indigo no-underline text-center'>
           Update
         </button>
       <% end %>
