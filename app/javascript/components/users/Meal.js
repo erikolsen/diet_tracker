@@ -41,22 +41,22 @@ class Meal extends React.Component {
         <div className={deexpanded}>
           <div className={`flex justify-between pb-2`}>
             <label className='p-1 bg-red-light flex justify-between'>
-              <span className='p-8'>
+              <span className='py-8 px-4'>
                 Protein
               </span>
-              <input value={this.props.protein.grams} onChange={(e) => this.props.update(this.props.idx, 'protein', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
+              <input value={this.props.protein.grams} onChange={(e) => this.props.update(this.props.idx, 'protein', 'grams', e.target.value) } className={`w-1/2 border border-black text-center`} type="text" name="name" />
             </label>
             <label className='p-1 bg-green flex justify-between'>
-              <span className='p-8'>
+              <span className='py-8 px-4'>
                 Carbs
               </span>
-              <input value={this.props.carbs.grams} onChange={(e) => this.props.update(this.props.idx, 'carbs', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
+              <input value={this.props.carbs.grams} onChange={(e) => this.props.update(this.props.idx, 'carbs', 'grams', e.target.value) } className={`w-1/2 border border-black text-center`} type="text" name="name" />
             </label>
             <label className='p-1 bg-yellow flex justify-between'>
-              <span className='p-8'>
+              <span className='py-8 px-4'>
                 Fats
               </span>
-              <input value={this.props.fats.grams} onChange={(e) => this.props.update(this.props.idx, 'fats', 'grams', e.target.value) } className={`w-1/3 border border-black text-center`} type="text" name="name" />
+              <input value={this.props.fats.grams} onChange={(e) => this.props.update(this.props.idx, 'fats', 'grams', e.target.value) } className={`w-1/2 border border-black text-center`} type="text" name="name" />
             </label>
           </div>
         </div>
